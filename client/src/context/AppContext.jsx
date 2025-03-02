@@ -8,7 +8,7 @@ export const AppContextProvider = (props) => {
   const currency = import.meta.env.VITE_CURRENCY;
   const navigate = useNavigate();
   const [allCourses, setAllCourses] = useState([]);
-  const [isEducator, setIsEducator] = useState(false);
+  const [isEducator, setIsEducator] = useState(true);
   // Fetch All Courses
   const fetchAllCourses = async () => {
     setAllCourses(dummyCourses);
@@ -34,6 +34,8 @@ export const AppContextProvider = (props) => {
     allCourses,
     navigate,
     calculateRating,
+    isEducator,
+    setIsEducator,
   };
   return (
     // eslint-disable-next-line react/prop-types
