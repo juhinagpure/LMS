@@ -28,7 +28,7 @@ const CoursesList = () => {
           </div>
           <SearchBar data={input} />
         </div>
-        <div>
+        <div className="">
           {allCourses.map((course, index) => (
             <div key={index}>{course}</div>
           ))}
