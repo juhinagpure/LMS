@@ -1,15 +1,17 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../../assets/assets";
 
-const SearchBar = (data) => {
+const SearchBar = ({ data }) => {
   const navigate = useNavigate();
-  const [input, setInput] = useState(data ? data : "");
+  const [input, setInput] = useState(data ? data.toString() : "");
 
   const onSearchHandler = (e) => {
     e.preventDefault();
     navigate("/course-list/" + input);
   };
+
   return (
     <form
       onSubmit={onSearchHandler}
@@ -35,6 +37,9 @@ const SearchBar = (data) => {
       </button>
     </form>
   );
+};
+SearchBar.propTypes = {
+  data: PropTypes.string,
 };
 
 export default SearchBar;

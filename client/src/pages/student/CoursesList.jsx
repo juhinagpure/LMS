@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CourseCard from "../../components/student/CourseCard"; // Adjust the import path as necessary
 import SearchBar from "../../components/student/SearchBar";
@@ -6,6 +6,20 @@ import { AppContext } from "../../context/AppContext"; // Adjust the import path
 const CoursesList = () => {
   const { navigate, allCourses } = useContext(AppContext);
   const { input } = useParams();
+  const [filtredCourses, setFiltredCourses] = useState([]);
+
+  useEffect(() => {
+    if (allCourses && allCourses.length > 0) {
+      const tempCourses = allCourses.slice();
+      input
+        ? setFiltredCourses(
+            tempCourses.filter((item) =>
+              item.courseTitle.toLowerCase().includes(input.toLowerCase())
+            )
+          )
+        : setFiltredCourses(tempCourses);
+    }
+  }, [allCourses, input]);
 
   return (
     <>
@@ -30,7 +44,7 @@ const CoursesList = () => {
           <SearchBar data={input} />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-16 gap-3 px-2 md:p-0">
-          {allCourses.map((course, index) => (
+          {filtredCourses.map((course, index) => (
             <CourseCard key={index} course={course} />
           ))}
         </div>
