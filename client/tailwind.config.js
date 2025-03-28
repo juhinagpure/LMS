@@ -13,6 +13,12 @@ export default {
       gridTemplateColumns: {
         auto: "repeat(auto-fit, minmax(200px, 1fr))",
       },
+      spacing: {
+        "section-height": "500px",
+      },
+      zIndex: {
+        "-1": "-1", // Add support for negative z-index
+      },
     },
   },
   plugins: [],
