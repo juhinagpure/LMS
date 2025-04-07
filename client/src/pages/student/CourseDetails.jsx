@@ -65,6 +65,18 @@ const CourseDetails = () => {
           </p>
           <div className="pt-8 text-gray-800">
             <h2 className="text-xl font-semibold">Course Structure</h2>
+            <div className="pt-5">
+              {courseData.courseContent.map((chapter, index) => (
+                <div key={index}>
+                  <div>
+                    <div>
+                      <img src={assets.down_arrow_icon} alt="arrow icon" />
+                      <p>{chapter.chapterTitle}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         {/* right column */}
