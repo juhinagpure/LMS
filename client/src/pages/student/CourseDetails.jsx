@@ -13,6 +13,8 @@ const CalculateChapterTime = (chapter) => {
 const CourseDetails = () => {
   const { id } = useParams();
   const [courseData, setCourseData] = useState(null);
+  const [openSections, setOpenSections] = useState({});
+
   const { allCourses, calculateRating } = useContext(AppContext);
 
   const fetchCourseData = async () => {
@@ -24,6 +26,12 @@ const CourseDetails = () => {
     fetchCourseData();
   }, []);
 
+  const toggleSection = (index) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
   return courseData ? (
     <>
       <div className="flex md:flex-row flex-col-reverse gap-10 relative items-start justify-between md:px-36 px-8 md:pt-30 pt-20 text-left">
@@ -78,7 +86,10 @@ const CourseDetails = () => {
                   key={index}
                   className="border border-gray-300 bg-white mg-12 rounded"
                 >
-                  <div className="flex items-center justify-between px-4 py-3 cursor-pointer select-none">
+                  <div
+                    className="flex items-center justify-between px-4 py-3 cursor-pointer select-none"
+                    onClick={() => toggleSection(index)}
+                  >
                     <div className="flex items-center gap-2">
                       <img src={assets.down_arrow_icon} alt="arrow icon" />
                       <p className="font-medium md:text-base text-sm">
@@ -90,19 +101,27 @@ const CourseDetails = () => {
                       {CalculateChapterTime(chapter)}
                     </p>
                   </div>
-                  <div>
-                    <ul>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 max-h-96 ${
+                      openSections[index] ? "max-h-96" : "max-h-0"
+                    }`}
+                  >
+                    <ul className="list-disc md:pl-10 pl-4 pr-4 py-2 text-gray-600 border-t border-gray-300">
                       {chapter.chapterContent.map((lecture, i) => (
-                        <li key={i}>
+                        <li key={i} className="flex items-start gap-2 py-1">
                           <img
                             src={assets.play_icon}
                             alt=""
                             className="w-4 h-4 mt-1"
                           />
-                          <div>
+                          <div className="flex items-center justify-between w-full text-gray-800 text-xs md:text-default">
                             <p>{lecture.lectureTitle}</p>
-                            <div>
-                              {lecture.isPreviewFree && <p>Preview</p>}
+                            <div className="flex gap-2">
+                              {lecture.isPreviewFree && (
+                                <p className="text-blue-500 cursor-pointer">
+                                  Preview
+                                </p>
+                              )}
                               <p>
                                 {humanizeDuration(
                                   lecture.lectureDuration * 60 * 1000,
