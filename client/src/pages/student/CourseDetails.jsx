@@ -1,8 +1,15 @@
+import humanizeDuration from "humanize-duration";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import Loading from "../../components/student/Loading";
 import { AppContext } from "../../context/AppContext";
+
+const CalculateChapterTime = (chapter) => {
+  let time = 0;
+  chapter.chapterContent.map((lecture) => (time += lecture.lectureDuration));
+  return humanizeDuration(time * 60 * 1000, { units: ["h", "m"] });
+};
 const CourseDetails = () => {
   const { id } = useParams();
   const [courseData, setCourseData] = useState(null);
@@ -67,12 +74,46 @@ const CourseDetails = () => {
             <h2 className="text-xl font-semibold">Course Structure</h2>
             <div className="pt-5">
               {courseData.courseContent.map((chapter, index) => (
-                <div key={index}>
-                  <div>
-                    <div>
+                <div
+                  key={index}
+                  className="border border-gray-300 bg-white mg-12 rounded"
+                >
+                  <div className="flex items-center justify-between px-4 py-3 cursor-pointer select-none">
+                    <div className="flex items-center gap-2">
                       <img src={assets.down_arrow_icon} alt="arrow icon" />
-                      <p>{chapter.chapterTitle}</p>
+                      <p className="font-medium md:text-base text-sm">
+                        {chapter.chapterTitle}
+                      </p>
                     </div>
+                    <p className="text-sm md:text-default">
+                      {chapter.chapterContent.length} lectures-
+                      {CalculateChapterTime(chapter)}
+                    </p>
+                  </div>
+                  <div>
+                    <ul>
+                      {chapter.chapterContent.map((lecture, i) => (
+                        <li key={i}>
+                          <img
+                            src={assets.play_icon}
+                            alt=""
+                            className="w-4 h-4 mt-1"
+                          />
+                          <div>
+                            <p>{lecture.lectureTitle}</p>
+                            <div>
+                              {lecture.isPreviewFree && <p>Preview</p>}
+                              <p>
+                                {humanizeDuration(
+                                  lecture.lectureDuration * 60 * 1000,
+                                  { units: ["h", "m"] }
+                                )}
+                              </p>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               ))}
