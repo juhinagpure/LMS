@@ -91,7 +91,13 @@ const CourseDetails = () => {
                     onClick={() => toggleSection(index)}
                   >
                     <div className="flex items-center gap-2">
-                      <img src={assets.down_arrow_icon} alt="arrow icon" />
+                      <img
+                        className={`transform transition-transform ${
+                          openSections[index] ? "rotate-180" : ""
+                        }`}
+                        src={assets.down_arrow_icon}
+                        alt="arrow icon"
+                      />
                       <p className="font-medium md:text-base text-sm">
                         {chapter.chapterTitle}
                       </p>
@@ -102,7 +108,7 @@ const CourseDetails = () => {
                     </p>
                   </div>
                   <div
-                    className={`overflow-hidden transition-all duration-300 max-h-96 ${
+                    className={`overflow-hidden transition-all duration-300  ${
                       openSections[index] ? "max-h-96" : "max-h-0"
                     }`}
                   >
