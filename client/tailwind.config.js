@@ -16,8 +16,14 @@ export default {
       spacing: {
         "section-height": "500px",
       },
-      zIndex: {
-        "-1": "-1", // Add support for negative z-index
+      // zIndex: {
+      //   "-1": "-1", // Add support for negative z-index
+      // },
+      maxWidth: {
+        "course-card": "424px",
+      },
+      boxShadow: {
+        "custom-card": "0px 4px 15px 2px rgba(0,0,0,0.1)",
       },
     },
   },

@@ -143,10 +143,33 @@ const CourseDetails = () => {
                 </div>
               ))}
             </div>
+            <div className="py-20 text-sm md:text-default">
+              <h3 className="text-xl font-semibold text-gray-800">
+                Course Description
+              </h3>
+              <p
+                className="pt-3 rich-text"
+                dangerouslySetInnerHTML={{
+                  __html: courseData.courseDescription,
+                }}
+              ></p>
+            </div>
           </div>
         </div>
         {/* right column */}
-        <div></div>
+        <div className="max-w-course-card z-10 shadow-custom-card rounded-t md:rounded-none overflow-hidden bg-white min-w-[300px] sm:min-w-[420px]">
+          <img src={courseData.courseThumbnail} alt="" />
+          <div className="pt-5">
+            <img
+              className="w-3.5"
+              src={assets.time_left_clock_icon}
+              alt="time left clock-icon"
+            />
+            <p className="text-red-500">
+              <span className="font-medium">5 days</span> left at this price{" "}
+            </p>
+          </div>
+        </div>
       </div>
     </>
   ) : (
