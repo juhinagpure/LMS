@@ -89,6 +89,7 @@ const CourseDetails = () => {
           </p>
           <div className="pt-8 text-gray-800">
             <h2 className="text-xl font-semibold">Course Structure</h2>
+
             <div className="pt-5">
               {courseData.courseContent.map((chapter, index) => (
                 <div
@@ -161,6 +162,7 @@ const CourseDetails = () => {
                 </div>
               ))}
             </div>
+
             <div className="py-20 text-sm md:text-default">
               <h3 className="text-xl font-semibold text-gray-800">
                 Course Description

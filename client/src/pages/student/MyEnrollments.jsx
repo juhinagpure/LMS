@@ -1,6 +1,8 @@
 import { Line } from "rc-progress";
 import { useContext, useState } from "react";
+import Footer from "../../components/student/Footer";
 import { AppContext } from "../../context/AppContext";
+
 const MyEnrollments = () => {
   const { enrolledCourses, CalculateCourseDuration, navigate } =
     useContext(AppContext);
@@ -85,6 +87,8 @@ const MyEnrollments = () => {
           </tbody>
         </table>
       </div>
+
+      <Footer />
     </>
   );
 };
